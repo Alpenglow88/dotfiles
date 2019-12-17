@@ -33,9 +33,7 @@ Once the script is done, quit and relaunch Terminal.
 
 It is highly recommended to run the script regularly to keep your computer up to date.
 
-Your last Install run will be saved to `~/install.log`. To review it, run `less ~/install.log`.
-
-That's it! :sparkles:
+Your last Install run will be saved to `~/install.log`. To review it, run `nano ~/install.log`.
 
 ## What it sets up
 The setup process will install:
