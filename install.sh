@@ -12,9 +12,9 @@ set -e
 # helpers: Check for required functions file
 ###############################################################################
 
-if [ -e helpers ]; then
+if [ -e helpers.sh ]; then
 	cd "$(dirname "${BASH_SOURCE[0]}")" \
-		&& . "helpers"
+		&& . "helpers.sh"
 else
 	printf "\n ⚠️  ./helpers not found "
 	exit 1

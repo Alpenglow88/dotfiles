@@ -21,7 +21,7 @@ install:
 
 ```sh
 cd dotfiles
-./install 2>&1 | tee ~/install.log
+./install.sh 2>&1 | tee ~/install.log
 ```
 Just follow the prompts and you’ll be fine. 👌
 
