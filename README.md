@@ -1,5 +1,5 @@
 
-> Formation is a shell script to set up a macOS laptop for design and development.
+> This is a shell script to set up a macOS laptop for  development.
 
 It can be run multiple times on the same machine safely. It installs, upgrades, or skips packages based on what is already installed on the machine.
 
@@ -8,24 +8,24 @@ It can be run multiple times on the same machine safely. It installs, upgrades, 
 Download the script:
 
 ```sh
-git clone git@github.com:Alpenglow88/formation.git && cd formation
+git clone git@github.com:Alpenglow88/dotfiles.git && cd dotfiles
 ```
 
 Review the script (please don't run scripts you don't understand):
 
 ```sh
-less slay
+nano install
 ```
 
-Slay:
+install:
 
 ```sh
-cd formation
-./slay 2>&1 | tee ~/slay.log
+cd dotfiles
+./install 2>&1 | tee ~/install.log
 ```
 Just follow the prompts and you’ll be fine. 👌
 
-:warning: Warning: I advise against running [this script](slay) unless you understand what it’s doing to your computer.
+:warning: Warning: I advise against running [this script](install) unless you understand what it’s doing to your computer.
 
 I created this based on my own preferences; your mileage may vary.
 
@@ -33,7 +33,7 @@ Once the script is done, quit and relaunch Terminal.
 
 It is highly recommended to run the script regularly to keep your computer up to date.
 
-Your last Formation run will be saved to `~/slay.log`. To review it, run `less ~/slay.log`.
+Your last Install run will be saved to `~/install.log`. To review it, run `less ~/install.log`.
 
 That's it! :sparkles:
 
@@ -102,9 +102,9 @@ The setup process will install:
 
 It should take less than 20 minutes to install (depends on your machine).
 
-## 🌶 Just add `~/.hot-sauce`
+##  Just add `~/.customisations`
 
-Your `~/.hot-sauce` is added at the end of the Formation script. Put your customizations there.
+Your `~/.customisations` are added at the end of the Install script. Put your customisations there.
 For example:
 
 ```sh
@@ -148,10 +148,10 @@ for font in ${NERDFONTS[@]}; do
 done
 ```
 
-Write your customizations such that they can be run safely more than once.
-See the `slay` script for examples.
+Write your customisations such that they can be run safely more than once.
+See the `install` script for examples.
 
-Formation functions such as `step` and `link` can be used in your `~/.hot-sauce`.
+Install functions such as `step` and `link` can be used in your `~/.customizations`.
 
 ## Known Issues
 Cask does not recognize applications installed outside of Homebrew Cask – in the case that the script fails, you can either remove the application from the install list or uninstall the application causing the failure and try again.
@@ -160,12 +160,7 @@ Cask does not recognize applications installed outside of Homebrew Cask – in t
 
 Inspiration and code was taken from many sources, including:
 
-* [Mina Markham's](https://github.com/minamarkham) [Formation](https://slay.sh/)
+* [Mina Markham's](https://github.com/minamarkham) [Install](https://install.sh/)
 * [Mathias Bynens'](https://github.com/mathiasbynens) [dotfiles](https://github.com/mathiasbynens/dotfiles)
 * thoughtbot's [laptop](https://github.com/thoughtbot/laptop/)
 
-## 📜  License
-
-Formation is customized for my own needs. It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
-
-[LICENSE]: LICENSE

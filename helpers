@@ -546,7 +546,7 @@ gem_install_or_update() {
 }
 
 install_brews() {
-    if test ! $(brew list | grep $brew); then
+    if test ! $(brew list | grep -w $brew); then
         echo_install "Installing $brew"
 		brew install $brew >/dev/null
 		print_in_green "${bold}✓ installed!${normal}\n"
@@ -556,7 +556,7 @@ install_brews() {
 }
 
 install_application_via_brew() {
-    if [[ ! $(brew cask list | grep $cask) ]]; then
+    if [[ ! $(brew cask list | grep -w $cask) ]]; then
         echo_install "Installing $cask"
         brew cask install $cask --appdir=/Applications >/dev/null
         print_in_green "${bold}✓ installed!${normal}\n"
@@ -637,8 +637,8 @@ label_green() {
     printf "\e[30;42m $1 \e[0m\e[32m $2 \033[0m\n"
 }
 
-e_lemon_ated() {
+book_end() {
     printf "
-  ${bold}Congrats! You're in formation!${normal} 
+  ${bold}Congrats! You're in all installed!${normal} 
 "
 }

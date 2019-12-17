@@ -4,19 +4,19 @@
 # ERROR: Let the user know if the script fails
 ###############################################################################
 
-trap 'ret=$?; test $ret -ne 0 && printf "\n   \e[31m\033[0m  Formation failed  \e[31m\033[0m\n" >&2; exit $ret' EXIT
+trap 'ret=$?; test $ret -ne 0 && printf "\n   \e[31m\033[0m  Install failed  \e[31m\033[0m\n" >&2; exit $ret' EXIT
 
 set -e
 
 ###############################################################################
-# TWIRL: Check for required functions file
+# helpers: Check for required functions file
 ###############################################################################
 
-if [ -e twirl ]; then
+if [ -e helpers ]; then
 	cd "$(dirname "${BASH_SOURCE[0]}")" \
-		&& . "twirl"
+		&& . "helpers"
 else
-	printf "\n ⚠️  ./twirl not found  💃🏾 First, you need to twirl on your haters\n"
+	printf "\n ⚠️  ./helpers not found "
 	exit 1
 fi
 
@@ -27,7 +27,7 @@ fi
 check_bash_version
 
 ###############################################################################
-# Get in Formation!          http://patorjk.com/software/taag/ ( font: Script )
+# Install!          http://patorjk.com/software/taag/ ( font: Script )
 ###############################################################################
 
 printf "
@@ -217,20 +217,20 @@ fi
 
 
 ###############################################################################
-# OPTIONAL: Customizations
+# OPTIONAL: Customisations
 ###############################################################################
-chapter "Adding hot sauce…"
-if [ -f "$HOME/.hot-sauce" ]; then
-	if ask "Do you want to add hot sauce?" Y; then
-		. "$HOME/.hot-sauce"; printf "\n  You got hot sauce in your bag. 🔥 ${bold}Swag.${normal}\n";
+chapter "Adding customisations"
+if [ -f "$HOME/.customisations" ]; then
+	if ask "Do you want to add customisations?" Y; then
+		. "$HOME/.customisations"; printf "\n  Installed customisations \n";
 	else
-		print_success_muted "Hot sauce declined. Skipped.";
+		print_success_muted "Customisations declined. Skipped.";
 	fi
 else
-	print_warning "No ~/.hot-sauce found. Skipping."
+	print_warning "No ~/.customisations found. Skipping."
 fi
 
 ###############################################################################
-# 🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋
+# 
 ###############################################################################
-e_lemon_ated
+book_end
