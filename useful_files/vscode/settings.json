@@ -1,0 +1,22 @@
+{
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "workbench.colorTheme": "Monokai",
+    "workbench.startupEditor": "newUntitledFile",
+
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "cSpell.userWords": [
+        "ffwd",
+        "fullscreen",
+        "mpfour",
+        "timecode",
+        "timecodes"
+    ],
+    "window.zoomLevel": -1,
+    "terminal.external.osxExec": "iTerm.app",
+    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace,",
+    "terminal.integrated.fontFamily": "\"Menlo for Powerline\"",
+}
