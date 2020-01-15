@@ -8,3 +8,4 @@ curl
 heroku/brew/heroku
 zsh
 zsh-completions
+node
