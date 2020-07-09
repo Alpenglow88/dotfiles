@@ -1,7 +1,7 @@
 ###############################################################################
 # INSTALL: Powerline10K for ZSH
 ###############################################################################
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone https://github.com/romkatv/powerlevel10k.git $.oh-my-zsh/custom/themes
 echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>! ~/.zshrc
 echo 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir rbenv vcs)' >>! ~/.zshrc
 echo 'POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history node_version)' >>! ~/.zshrc
