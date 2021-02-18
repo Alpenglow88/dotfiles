@@ -1,3 +1,4 @@
 ejs
 express
 body-parser
+nodemon
