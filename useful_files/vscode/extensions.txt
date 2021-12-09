@@ -1,0 +1,26 @@
+These are VSCode extensions that should be installed to make life a little easier
+
+Ruby:
+Ruby
+Ruby Solargraph
+Ruby-rubocop
+VSCode Ruby
+
+
+JS:
+ESLint
+Lebab
+NPM
+Prettier
+
+Python:
+Python (Microsoft)
+
+General:
+Code Spell Checker
+Cucumber(Gherkin) Full Support
+LiveShare
+Markdown All in One
+Path Autocomplete
+Sublime Test Keymap and Settings Importer
+
