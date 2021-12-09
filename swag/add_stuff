@@ -3,8 +3,8 @@
 ###############################################################################
 git clone https://github.com/romkatv/powerlevel10k.git $.oh-my-zsh/custom/themes
 echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>! ~/.zshrc
-echo 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir rbenv vcs)' >>! ~/.zshrc
-echo 'POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history node_version)' >>! ~/.zshrc
+echo 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)' >>! ~/.zshrc
+echo 'POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status pyenv rvm node_version)' >>! ~/.zshrc
 
 ###############################################################################
 # INSTALL: Menlo for Powerline font
@@ -12,4 +12,3 @@ echo 'POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs history node_ve
 https://github.com/abertsch/Menlo-for-Powerline 
 install font
 set "terminal.integrated.fontFamily": "Menlo for Powerline" in vscode
-
