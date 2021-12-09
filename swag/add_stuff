@@ -2,9 +2,8 @@
 # INSTALL: Powerline10K for ZSH
 ###############################################################################
 git clone https://github.com/romkatv/powerlevel10k.git $.oh-my-zsh/custom/themes
-echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>! ~/.zshrc
-echo 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)' >>! ~/.zshrc
-echo 'POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status pyenv rvm node_version)' >>! ~/.zshrc
+
+Ensure ./zshrc is the one supplied in this repo
 
 ###############################################################################
 # INSTALL: Menlo for Powerline font
