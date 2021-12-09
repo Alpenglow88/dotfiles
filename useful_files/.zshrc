@@ -10,7 +10,7 @@ export ZSH="/Users/iangoddard/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status rvm node_version)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status pyenv rvm node_version)
 POWERLEVEL9K_VCS_GITHUBG_ICON=$'\uE20E '
 POWERLEVEL9K_RVM_BACKGROUND='001'
 POWERLEVEL9K_NODE_VERSION_BACKGROUND='006'
