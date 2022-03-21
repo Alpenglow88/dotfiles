@@ -6,7 +6,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ###############################################################################
 # INSTALL: Powerline10K for ZSH
 ###############################################################################
-git clone https://github.com/romkatv/powerlevel10k.git $.oh-my-zsh/custom/themes
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel9k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel9k
 
 Ensure ./zshrc is the one supplied in this repo
 
@@ -16,3 +17,4 @@ Ensure ./zshrc is the one supplied in this repo
 https://github.com/abertsch/Menlo-for-Powerline 
 install font
 set "terminal.integrated.fontFamily": "Menlo for Powerline" in vscode
+i

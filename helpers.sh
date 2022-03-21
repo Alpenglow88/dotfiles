@@ -30,9 +30,9 @@ DOTFILES_ROOT=$HOME/.dotfiles
 ###############################################################################
 _print_in_color() {
     printf "%b" \
-        "$(tput setaf "$2" 2> /dev/null)" \
+        "$(tput setaf "$2" 2>/dev/null)" \
         "$1" \
-        "$(tput sgr0 2> /dev/null)"
+        "$(tput sgr0 2>/dev/null)"
 }
 
 _print_error_stream() {
@@ -118,91 +118,90 @@ _kill_all_subprocesses() {
 
     for i in $(jobs -p); do
         kill "$i"
-        wait "$i" &> /dev/null
+        wait "$i" &>/dev/null
     done
 
 }
 
 _set_trap() {
 
-    trap -p "$1" | grep "$2" &> /dev/null \
-        || trap '$2' "$1"
+    trap -p "$1" | grep "$2" &>/dev/null ||
+        trap '$2' "$1"
 
 }
 
 _link_file() {
-  local src=$1 dst=$2
+    local src=$1 dst=$2
 
-  local overwrite= backup= skip=
-  local action=
+    local overwrite= backup= skip=
+    local action=
 
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
-  then
+    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
 
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
-    then
+        if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
 
-      local currentSrc="$(readlink $dst)"
+            local currentSrc="$(readlink $dst)"
 
-      if [ "$currentSrc" == "$src" ]
-      then
+            if [ "$currentSrc" == "$src" ]; then
 
-        skip=true;
+                skip=true
 
-      else
+            else
 
-        printf "\r   ${yellow}!${reset} File already exists: $dst ($(basename "$src")), what do you want to do?
+                printf "\r   ${yellow}!${reset} File already exists: $dst ($(basename "$src")), what do you want to do?
      [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all? "
-        read -n 1 action
+                read -n 1 action
 
-        case "$action" in
-          o )
-            overwrite=true;;
-          O )
-            overwrite_all=true;;
-          b )
-            backup=true;;
-          B )
-            backup_all=true;;
-          s )
-            skip=true;;
-          S )
-            skip_all=true;;
-          * )
-            ;;
-        esac
+                case "$action" in
+                o)
+                    overwrite=true
+                    ;;
+                O)
+                    overwrite_all=true
+                    ;;
+                b)
+                    backup=true
+                    ;;
+                B)
+                    backup_all=true
+                    ;;
+                s)
+                    skip=true
+                    ;;
+                S)
+                    skip_all=true
+                    ;;
+                *) ;;
 
-      fi
+                esac
 
+            fi
+
+        fi
+
+        overwrite=${overwrite:-$overwrite_all}
+        backup=${backup:-$backup_all}
+        skip=${skip:-$skip_all}
+
+        if [ "$overwrite" == "true" ]; then
+            rm -rf "$dst"
+            print_in_green "\n      ✓ deleted $dst"
+        fi
+
+        if [ "$backup" == "true" ]; then
+            mv "$dst" "${dst}.backup"
+            print_in_green "\n      ✓ moved $dst to ${dst}.backup"
+        fi
+
+        if [ "$skip" == "true" ]; then
+            printf "\n  ${dim}    ✓ $src already linked. Skipped.${reset}"
+        fi
     fi
 
-    overwrite=${overwrite:-$overwrite_all}
-    backup=${backup:-$backup_all}
-    skip=${skip:-$skip_all}
-
-    if [ "$overwrite" == "true" ]
-    then
-      rm -rf "$dst"
-      print_in_green "\n      ✓ deleted $dst"
+    if [ "$skip" != "true" ]; then # "false" or empty
+        ln -s "$1" "$2"
+        print_in_green "\n      ✓ linked $1 to $2"
     fi
-
-    if [ "$backup" == "true" ]
-    then
-      mv "$dst" "${dst}.backup"
-      print_in_green "\n      ✓ moved $dst to ${dst}.backup"
-    fi
-
-    if [ "$skip" == "true" ]
-    then
-      printf "\n  ${dim}    ✓ $src already linked. Skipped.${reset}"
-    fi
-  fi
-
-  if [ "$skip" != "true" ]  # "false" or empty
-  then
-    ln -s "$1" "$2"
-    print_in_green "\n      ✓ linked $1 to $2"
-  fi
 }
 
 ###############################################################################
@@ -278,8 +277,7 @@ print_error() {
 ###############################################################################
 
 check_bash_version() {
-    if ((BASH_VERSINFO[0] < 3))
-    then
+    if ((BASH_VERSINFO[0] < 3)); then
         print_error "Sorry, you need at least bash-3.0 to run this script."
         exit 1
     fi
@@ -326,11 +324,11 @@ get_os_version() {
 }
 
 check_internet_connection() {
-    if [ ping -q -w1 -c1 google.com &>/dev/null ]; then
-        print_error "Please check your internet connection";
+    if [ ping -q -w1 -c1 google.com ] &>/dev/null; then
+        print_error "Please check your internet connection"
         exit 0
     else
-        print_success "Internet connection";
+        print_success "Internet connection"
     fi
 }
 
@@ -359,8 +357,8 @@ execute() {
     # Execute commands in background
 
     eval "$CMDS" \
-        &> /dev/null \
-        2> "$TMP_FILE" &
+        &>/dev/null \
+        2>"$TMP_FILE" &
 
     cmdsPID=$!
 
@@ -376,7 +374,7 @@ execute() {
     # Wait for the commands to no longer be executing
     # in the background, and then get their exit code.
 
-    wait "$cmdsPID" &> /dev/null
+    wait "$cmdsPID" &>/dev/null
     exitCode=$?
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -386,7 +384,7 @@ execute() {
     print_result $exitCode "$MSG"
 
     if [ $exitCode -ne 0 ]; then
-        _print_error_stream < "$TMP_FILE"
+        _print_error_stream <"$TMP_FILE"
     fi
 
     rm -rf "$TMP_FILE"
@@ -412,13 +410,12 @@ mkd() {
 }
 
 symlink_dotfiles() {
-  local overwrite_all=false backup_all=false skip_all=false
+    local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    _link_file "$src" "$dst"
-  done
+    for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*'); do
+        dst="$HOME/.$(basename "${src%.*}")"
+        _link_file "$src" "$dst"
+    done
 }
 
 ###############################################################################
@@ -428,7 +425,7 @@ ask_for_sudo() {
 
     # Ask for the administrator password upfront.
 
-    sudo -v &> /dev/null
+    sudo -v &>/dev/null
 
     # Update existing `sudo` time stamp
     # until this script has finished.
@@ -436,7 +433,11 @@ ask_for_sudo() {
     # https://gist.github.com/cowboy/3118588
 
     # Keep-alive: update existing `sudo` time stamp until script has finished
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    while true; do
+        sudo -n true
+        sleep 60
+        kill -0 "$$" || exit
+    done 2>/dev/null &
 
     print_success "Password cached"
 
@@ -472,15 +473,15 @@ ask() {
 
         # Check if the reply is valid
         case "$reply" in
-            Y*|y*) return 0 ;;
-            N*|n*) return 1 ;;
+        Y* | y*) return 0 ;;
+        N* | n*) return 1 ;;
         esac
 
     done
 }
 
 ###############################################################################
-# 
+#
 ###############################################################################
 
 # return 1 if global command line program installed, else 0
@@ -503,19 +504,20 @@ copy_key_github() {
 }
 
 github_key_check() {
-	if ask "SSH key found. Enter it in Github?" Y; then
-		copy_key_github;
-	else
-		print_success "SSH key";
-	fi
+    if ask "SSH key found. Enter it in Github?" Y; then
+        copy_key_github
+    else
+        print_success "SSH key"
+    fi
 }
 
 create_ssh_key() {
-	if ask "No SSH key found. Create one?" Y; then
-		ssh-keygen -t rsa; github_key_check;
-	else
-		return 0;
-	fi
+    if ask "No SSH key found. Create one?" Y; then
+        ssh-keygen -t rsa
+        github_key_check
+    else
+        return 0
+    fi
 }
 
 ssh_key_setup() {
@@ -529,7 +531,7 @@ ssh_key_setup() {
 }
 
 mas_setup() {
-    if mas account > /dev/null; then
+    if mas account >/dev/null; then
         return 0
     else
         return 1
@@ -537,7 +539,7 @@ mas_setup() {
 }
 
 gem_install_or_update() {
-    if gem list "$1" --installed > /dev/null; then
+    if gem list "$1" --installed >/dev/null; then
         gem update "$@"
     else
         gem install "$@"
@@ -548,41 +550,48 @@ gem_install_or_update() {
 install_brews() {
     if test ! $(brew list | grep -w $brew); then
         echo_install "Installing $brew"
-		brew install $brew >/dev/null
-		print_in_green "${bold}✓ installed!${normal}\n"
-	else
-		print_success_muted "$brew already installed. Skipped."
+        brew install $brew >/dev/null
+        print_in_green "${bold}✓ installed!${normal}\n"
+    else
+        print_success_muted "$brew already installed. Skipped."
     fi
 }
 
 install_application_via_brew() {
+
     if [[ ! $(brew cask list | grep -w $cask) ]]; then
-        echo_install "Installing $cask"
-        brew  install --cask $cask --appdir=/Applications >/dev/null
-        print_in_green "${bold}✓ installed!${normal}\n"
+
+        if [ ! -d "/Applications/$cask.app" ]; then
+            echo_install "Installing $cask"
+            brew install --cask $cask --appdir=/Applications >/dev/null
+            print_in_green "${bold}✓ installed!${normal}\n"
+        else
+            print_success_muted "$cask already installed. Skipped."
+        fi
+
     else
-    	print_success_muted "$cask already installed. Skipped."
+        print_success_muted "$cask already installed. Skipped."
     fi
 }
 
 install_application_via_app_store() {
-	if ! mas list | grep $1 &> /dev/null; then
-		echo_install "Installing $2"
-		mas install $1 >/dev/null
-		print_in_green "${bold}✓ installed!${normal}\n"
-	else
-		print_success_muted "$2 already installed. Skipped."
-	fi
+    if ! mas list | grep $1 &>/dev/null; then
+        echo_install "Installing $2"
+        mas install $1 >/dev/null
+        print_in_green "${bold}✓ installed!${normal}\n"
+    else
+        print_success_muted "$2 already installed. Skipped."
+    fi
 }
 
 install_npm_packages() {
-	if [[ $(cli_is_installed $2) == 0 ]]; then
-		echo_install "Installing $1"
-		npm install $1 -g --silent
-		print_in_green "${bold}✓ installed!${normal}\n"
-	else
-		print_success_muted "$1 already installed. Skipped."
-	fi
+    if [[ $(cli_is_installed $2) == 0 ]]; then
+        echo_install "Installing $1"
+        npm install $1 -g --silent
+        print_in_green "${bold}✓ installed!${normal}\n"
+    else
+        print_success_muted "$1 already installed. Skipped."
+    fi
 }
 
 # The releases are returned in the format
@@ -596,32 +605,38 @@ get_github_version() {
 # Text Formatting
 ###############################################################################
 title() {
-    local fmt="$1"; shift
+    local fmt="$1"
+    shift
     printf "\n✦  ${bold}$fmt${normal}\n└─────────────────────────────────────────────────────○\n" "$@"
 }
 
 chapter() {
-    local fmt="$1"; shift
+    local fmt="$1"
+    shift
     printf "\n✦  ${bold}$((count++)). $fmt${normal}\n└─────────────────────────────────────────────────────○\n" "$@"
 }
 
 echo_install() {
-    local fmt="$1"; shift
+    local fmt="$1"
+    shift
     printf "  [↓] $fmt " "$@"
 }
 
 todo() {
-    local fmt="$1"; shift
+    local fmt="$1"
+    shift
     printf "  [ ] $fmt\n" "$@"
 }
 
 inform() {
-    local fmt="$1"; shift
+    local fmt="$1"
+    shift
     printf "   ✦  $fmt\n" "$@"
 }
 
 announce() {
-    local fmt="$1"; shift
+    local fmt="$1"
+    shift
     printf "○───✦ $fmt\n" "$@"
 }
 
