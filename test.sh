@@ -1,16 +1,7 @@
-# install_brews() {
-#     if test ! $(brew list | grep -w wget); then
-#         echo "Installing"
-# 		brew install wget
-# 		echo "${bold}✓ installed!${normal}\n"
-# 	else
-# 		echo "$brew already installed. Skipped."
-#     fi
-# }
+install_application_via_brew() {
 
-# install_brews
+echo brew list --cask
+}
 
+install_application_via_brew
 
-if [ -d "/Applications/Spectacle.app" ]; then
-  echo "hello"
-fi

@@ -559,7 +559,7 @@ install_brews() {
 
 install_application_via_brew() {
 
-    if [[ ! $(brew cask list | grep -w $cask) ]]; then
+    if [[ ! $(brew list --cask | grep -w $cask) ]]; then
 
         if [ ! -d "/Applications/$cask.app" ]; then
             echo_install "Installing $cask"
