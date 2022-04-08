@@ -1,3 +1,5 @@
+eval $(/opt/homebrew/bin/brew shellenv)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -9,10 +11,6 @@ export NVM_DIR="$HOME/.nvm"
 # RVM Stuff
 export RVM_DIR="$HOME/.rvm"
 [ -s "$RVM_DIR/rvm.sh" ] && \. "$RVM_DIR/rvm.sh"  # This loads rvm
-
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/ian.goddard/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -38,6 +36,10 @@ POWERLEVEL9K_RVM_FOREGROUND=white
 POWERLEVEL9K_PYENV_BACKGROUND='002'
 POWERLEVEL9K_NODE_VERSION_BACKGROUND='006'
 POWERLEVEL9K_NODE_VERSION_FOREGROUND='000'
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/ian.goddard/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
