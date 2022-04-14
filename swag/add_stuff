@@ -12,12 +12,17 @@ git clone --depth=1 https://github.com/romkatv/powerlevel9k.git ${ZSH_CUSTOM:-$H
 Ensure ./zshrc is the one supplied in this repo
 
 ###############################################################################
+# Powerlevel9k prompts
+###############################################################################
+
+https://github.com/Powerlevel9k/powerlevel9k#customizing-prompt-segments
+
+###############################################################################
 # INSTALL: Menlo for Powerline font
 ###############################################################################
 https://github.com/abertsch/Menlo-for-Powerline 
 install font
 set "terminal.integrated.fontFamily": "Menlo for Powerline" in vscode
-i
 
 ###############################################################################
 # To get brew working on M1 Mac
@@ -26,3 +31,4 @@ i
 Add the following to the top of your .zshrc file if using an M1 Mac
 
 eval $(/opt/homebrew/bin/brew shellenv)
+
